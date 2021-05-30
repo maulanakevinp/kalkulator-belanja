@@ -111,7 +111,7 @@
                     cell_jumlah.className = 'text-right';
 
                     cell_opsi.innerHTML = `
-                        <a href="#" class="btn btn-danger btn-sm hapus" data-jumlah="${item.jumlah}" data-id="${item.id}" title="Hapus">X</a>
+                        <button type="button" class="btn btn-danger btn-sm hapus" data-jumlah="${item.jumlah}" data-id="${item.id}" title="Hapus">X</button>
                     `;
                     cell_item_belanja.innerHTML = `<div style="word-wrap: break-word;">${item.nama}<br>${item.qty} x ${new Intl.NumberFormat('id-ID').format(item.harga)}</div>`;
                     cell_jumlah.innerHTML = new Intl.NumberFormat('id-ID').format(item.jumlah);
@@ -152,7 +152,7 @@
                             localStorage.setItem('daftar_belanja', JSON.stringify(daftar_belanja));
 
                             cell_opsi.innerHTML = `
-                                <a href="#" class="btn btn-danger btn-sm hapus" data-jumlah="${jumlah}" data-id="${id + 1}" title="Hapus">X</a>
+                                <button type="button" class="btn btn-danger btn-sm hapus" data-jumlah="${jumlah}" data-id="${id + 1}" title="Hapus">X</button>
                             `;
                             cell_item_belanja.innerHTML = `<div style="word-wrap: break-word;">${nama}<br>${qty} x ${new Intl.NumberFormat('id-ID').format(harga)}</div>`;
                             cell_jumlah.innerHTML = new Intl.NumberFormat('id-ID').format(jumlah);
