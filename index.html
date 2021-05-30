@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <title>Kalkulator Belanja</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="Kalkulator Belanja" />
+    <meta name="keywords" content="Kalkulator belanja,kalkulator,Kalkulator,belanja,Belanja">
+    <meta name="author" content="Maulana Kevin Pradana" />
+    <meta name="theme-color" content="#00ffb3" />
+    <!-- Mendeklarasikan ikon untuk iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Nama Situs" />
+    <link rel="apple-touch-icon" href="assets/img/128x128.png" />
+    <!-- Mendeklarasikan ikon untuk Windows -->
+    <meta name="msapplication-TileImage" content="assets/img/128x128.png" />
+    <meta name="msapplication-TileColor" content="#000000" />
+    <!-- Favicon icon -->
+    <link rel="icon" href="/assets/images/favicon.png" type="image/x-icon">
+    <link href="/assets/css/styles.css" rel="stylesheet" />
+    <link rel="manifest" href="/assets/js/manifest.json">
+    <style>
+        .card {
+            transition: box-shadow 1s;
+        }
+        .card:hover {
+            box-shadow: -4px -4px 20px rgba(0, 36, 90, 0.25),
+                4px 4px 20px rgba(0, 191, 255, 0.25);
+        }
+    </style>
+</head>
+<body class="p-0">
+    <div class="container my-3">
+        <h3 class="text-center mb-3">Kalkulator Belanja</h3>
+        <div class="card mb-3">
+            <div class="card-body">
+                <form class="needs-validation" novalidate>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label" for="item_belanja">Item Belanja</label>
+                            <input autofocus type="text" class="form-control" id="item_belanja" placeholder="Masukkan Item Belanja" value="" required>
+                            <div class="invalid-feedback">
+                                item belanja wajib diisi.
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label" for="qty">Qty</label>
+                            <input type="number" class="form-control" id="qty" placeholder="Masukkan Qty" value="" required>
+                            <div class="invalid-feedback">
+                                qty wajib diisi.
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label" for="harga">Harga</label>
+                            <input type="number" class="form-control" id="harga" placeholder="Masukkan Harga" value="" required>
+                            <div class="invalid-feedback">
+                                harga wajib diisi.
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-block btn-success" type="submit">Simpan</button>
+                </form>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="table" class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>OPSI</th>
+                                <th>ITEM BELANJA</th>
+                                <th class="text-right">JUMLAH</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="2" class="text-right">TOTAL</th>
+                                <th id="total" class="text-right">Rp. 0</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/register.js"></script>
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+            'use strict';
+            const tabel = document.getElementById('table');
+            let total = 0;
+            let id = 0;
+            
+            if (localStorage.getItem('daftar_belanja')) {
+                JSON.parse(localStorage.getItem('daftar_belanja')).map(function(item, key) {
+                    let row = table.insertRow(1);
+                    let cell_opsi = row.insertCell(0);
+                    let cell_item_belanja = row.insertCell(1);
+                    let cell_jumlah = row.insertCell(2);
+                    cell_jumlah.className = 'text-right';
+
+                    cell_opsi.innerHTML = `
+                        <a href="#" class="btn btn-danger btn-sm hapus" data-jumlah="${item.jumlah}" data-id="${item.id}" title="Hapus">X</a>
+                    `;
+                    cell_item_belanja.innerHTML = `<div style="word-wrap: break-word;">${item.nama}<br>${item.qty} x ${new Intl.NumberFormat('id-ID').format(item.harga)}</div>`;
+                    cell_jumlah.innerHTML = new Intl.NumberFormat('id-ID').format(item.jumlah);
+                    total = total + item.jumlah;
+                    document.getElementById('total').innerHTML = new Intl.NumberFormat('id-ID').format(total);
+                    id = item.id;
+                });
+            }
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        if (form.checkValidity() === true) {
+                            let row = table.insertRow(1);
+                            let cell_opsi = row.insertCell(0);
+                            let cell_item_belanja = row.insertCell(1);
+                            let cell_jumlah = row.insertCell(2);
+                            cell_jumlah.className = 'text-right';
+                            
+                            let nama = document.getElementById('item_belanja').value;
+                            let qty = parseInt(document.getElementById('qty').value);
+                            let harga = parseInt(document.getElementById('harga').value);
+                            let jumlah = qty * harga;
+                            let belanja = {
+                                id      : id + 1,
+                                nama    : nama,
+                                qty     : qty,
+                                harga   : harga,
+                                jumlah  : jumlah,
+                            };
+
+                            let daftar_belanja = JSON.parse(localStorage.getItem('daftar_belanja')) ?? [];
+                            daftar_belanja.push(belanja);
+                            localStorage.setItem('daftar_belanja', JSON.stringify(daftar_belanja));
+
+                            cell_opsi.innerHTML = `
+                                <a href="#" class="btn btn-danger btn-sm hapus" data-jumlah="${jumlah}" data-id="${id + 1}" title="Hapus">X</a>
+                            `;
+                            cell_item_belanja.innerHTML = `<div style="word-wrap: break-word;">${nama}<br>${qty} x ${new Intl.NumberFormat('id-ID').format(harga)}</div>`;
+                            cell_jumlah.innerHTML = new Intl.NumberFormat('id-ID').format(jumlah);
+                            total = total + jumlah;
+                            document.getElementById('total').innerHTML = new Intl.NumberFormat('id-ID').format(total);
+                            form.reset();
+                            document.getElementById('item_belanja').focus();
+                            id++;
+                        }
+                    }, false);
+                });
+            }, false);
+
+            document.addEventListener('click', function(event) {
+                if (event.target.classList.contains('hapus')) {
+                    event.preventDefault();
+                    const row = event.target.parentElement.parentElement;
+                    let jumlah_pengurangan = parseInt(event.target.dataset.jumlah);
+                    let id_hapus = parseInt(event.target.dataset.id);
+                    let temp_daftar_belanja = [];
+                    JSON.parse(localStorage.getItem('daftar_belanja')).map(function(item, key) {
+                        if (item.id != id_hapus) {
+                            temp_daftar_belanja.push(item);
+                        }
+                    });
+                    localStorage.removeItem('daftar_belanja');
+                    localStorage.setItem('daftar_belanja', JSON.stringify(temp_daftar_belanja));
+                    row.remove();
+                    total = total - jumlah_pengurangan;
+                    document.getElementById('total').innerHTML = new Intl.NumberFormat('id-ID').format(total);
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

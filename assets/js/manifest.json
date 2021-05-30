@@ -1,0 +1,20 @@
+{
+    "name": "Kakulator Belanja",
+    "short_name": "KalBel",
+    "description": "Aplikasi penghitung jumlah total belanja",
+    "lang": "id-ID",
+    "theme_color": "#00ffb3",
+    "background_color": "#000",
+    "display": "standalone",
+    "orientation": "portrait-primary",
+    "start_url": "/",
+    "icons": [{
+      "src": "/assets/images/72x72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+     }, {
+      "src": "/assets/images/512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+     }]
+}
