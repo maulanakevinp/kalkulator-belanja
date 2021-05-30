@@ -1,8 +1,7 @@
-const CACHE_NAME = 'SW-001';
+const CACHE_NAME = 'cache-kalkulator-belanja';
 const toCache = [
-    '/',
     'assets/js/manifest.json',
-    'assets/js/register.js',
+    'register.js',
     'assets/img/favicon.png',
 ];
 
