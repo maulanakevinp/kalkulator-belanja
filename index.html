@@ -87,7 +87,13 @@
             </div>
         </div>
     </div>
-    <script src="register.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+          window.addEventListener('load', () => {
+            navigator.serviceWorker.register('sw.js');
+          });
+        }
+      </script>
     <script>
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function() {
