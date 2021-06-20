@@ -33,7 +33,31 @@
 </head>
 <body class="p-0 bg-dark text-white">
     <div class="container my-3">
-        <h3 class="text-center mb-3 text-white">Kalkulator Belanja</h3>
+        <h4 class="text-center mb-3 text-white">Kalkulator Belanja</h4>
+        <div class="card bg-dark border-white mb-3">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="table" class="table table-hover table-striped text-white">
+                        <thead>
+                            <tr class="bg-light text-dark">
+                                <th>OPSI</th>
+                                <th>ITEM BELANJA</th>
+                                <th class="text-right">JUMLAH</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <table class="table table-hover table-striped">
+                        <tfoot>
+                            <tr class="bg-light">
+                                <th colspan="2">TOTAL</th>
+                                <th id="total" class="text-right">Rp. 0</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
         <div class="card bg-dark mb-3 border-white">
             <div class="card-body">
                 <form class="needs-validation" novalidate>
@@ -64,28 +88,6 @@
                 </form>
             </div>
         </div>
-        <div class="card bg-dark border-white">
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table id="table" class="table table-hover table-striped text-white">
-                        <thead>
-                            <tr>
-                                <th>OPSI</th>
-                                <th>ITEM BELANJA</th>
-                                <th class="text-right">JUMLAH</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                        <tfoot>
-                            <tr>
-                                <th colspan="2" class="text-right">TOTAL</th>
-                                <th id="total" class="text-right">Rp. 0</th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-            </div>
-        </div>
     </div>
     <script>
         if ('serviceWorker' in navigator) {
@@ -110,7 +112,7 @@
             
             if (localStorage.getItem('daftar_belanja')) {
                 JSON.parse(localStorage.getItem('daftar_belanja')).map(function(item, key) {
-                    let row = table.insertRow(1);
+                    let row = table.insertRow(table.rows.length);
                     let cell_opsi = row.insertCell(0);
                     let cell_item_belanja = row.insertCell(1);
                     let cell_jumlah = row.insertCell(2);
@@ -135,7 +137,7 @@
                         event.preventDefault();
                         event.stopPropagation();
                         if (form.checkValidity() === true) {
-                            let row = table.insertRow(1);
+                            let row = table.insertRow(-1);
                             let cell_opsi = row.insertCell(0);
                             let cell_item_belanja = row.insertCell(1);
                             let cell_jumlah = row.insertCell(2);
