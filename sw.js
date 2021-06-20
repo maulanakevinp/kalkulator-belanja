@@ -1,11 +1,11 @@
 var CACHE_NAME = 'kalkulator-belanja-cache-v1';
 var urlsToCache = [
-    '/',
-    '/assets/css/styles.css',
-    '/assets/images/72x72.png',
-    '/assets/images/128x128.png',
-    '/assets/images/512x512.png',
-    '/assets/images/favicon.png',
+    '/kalkulator-belanja',
+    '/kalkulator-belanja/assets/css/styles.css',
+    '/kalkulator-belanja/assets/images/72x72.png',
+    '/kalkulator-belanja/assets/images/128x128.png',
+    '/kalkulator-belanja/assets/images/512x512.png',
+    '/kalkulator-belanja/assets/images/favicon.png',
 ];
 
 self.addEventListener('install', function (event) {
