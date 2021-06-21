@@ -1,45 +1,45 @@
-var CACHE_NAME = 'kalkulator-belanja-cache-v1';
-var urlsToCache = [
+const CACHE_NAME = 'CACHE-02';
+const toCache = [
     '/kalkulator-belanja',
-    '/kalkulator-belanja/assets/css/styles.css',
-    '/kalkulator-belanja/assets/images/72x72.png',
-    '/kalkulator-belanja/assets/images/128x128.png',
-    '/kalkulator-belanja/assets/images/512x512.png',
-    '/kalkulator-belanja/assets/images/favicon.png',
+    '/kalkulator-belanja/',
+    '/kalkulator-belanja/css/styles.css',
+    '/kalkulator-belanja/manifest.json',
+    '/kalkulator-belanja/images/favicon.png',
 ];
 
-self.addEventListener('install', function (event) {
-    // Perform install steps
+self.addEventListener('install', function(event) {
     event.waitUntil(
-        caches.open(CACHE_NAME).then(function (cache) {
-            console.log('install serviceworker... cache opened!');
-            return cache.addAll(urlsToCache);
+        caches.open(CACHE_NAME)
+        .then(function(cache) {
+            return cache.addAll(toCache)
         })
-    );
-});
+        .then(self.skipWaiting())
+    )
+})
 
-self.addEventListener('fetch', function (event) {
+self.addEventListener('fetch', function(event) {
     event.respondWith(
-        caches.match(event.request).then(function (response) {
-            // Cache hit - return response
-            if (response) {
-                return response;
-            }
-            return fetch(event.request);
+        fetch(event.request)
+        .catch(() => {
+            return caches.open(CACHE_NAME)
+            .then((cache) => {
+                return cache.match(event.request)
+            })
         })
-    );
-});
+    )
+})
 
-self.addEventListener('activate', function (event) {
+self.addEventListener('activate', function(event) {
     event.waitUntil(
-        caches.keys().then(function (cacheNames) {
-            return Promise.all(
-                cacheNames.filter(function (cacheName) {
-                    return cacheName != CACHE_NAME;
-                }).map(function (cacheName) {
-                    return caches.delete(cacheName);
-                })
-            );
+        caches.keys()
+        .then((keyList) => {
+            return Promise.all(keyList.map((key) => {
+                if (key !== CACHE_NAME) {
+                    console.log('Hapus cache lama', key)
+                    return caches.delete(key)
+                }
+            }))
         })
-    );
-});
+        .then(() => self.clients.claim())
+    )
+})

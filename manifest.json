@@ -9,22 +9,22 @@
     "orientation": "portrait-primary",
     "start_url": "/kalkulator-belanja/",
     "icons": [{
-      "src": "../images/72x72.png",
+      "src": "./images/72x72.png",
       "sizes": "72x72",
       "type": "image/png",
       "purpose": "any"
      }, {
-      "src": "../images/72x72.png",
+      "src": "./images/72x72.png",
       "sizes": "72x72",
       "type": "image/png",
       "purpose": "maskable"
      }, {
-      "src": "../images/512x512.png",
+      "src": "./images/512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
      }, {
-      "src": "../images/512x512.png",
+      "src": "./images/512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"

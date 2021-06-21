@@ -1,26 +1,13 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kalkulator Belanja</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="Kalkulator Belanja" />
-    <meta name="keywords" content="Kalkulator belanja,kalkulator,Kalkulator,belanja,Belanja">
-    <meta name="author" content="Maulana Kevin Pradana" />
-    <meta name="theme-color" content="#343a40" />
-    <!-- Mendeklarasikan ikon untuk iOS -->
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="apple-mobile-web-app-title" content="Kalkulator Belanja" />
-    <link rel="apple-touch-icon" href="assets/img/128x128.png" />
-    <!-- Mendeklarasikan ikon untuk Windows -->
-    <meta name="msapplication-TileImage" content="assets/img/128x128.png" />
-    <meta name="msapplication-TileColor" content="#000000" />
-    <!-- Favicon icon -->
-    <link rel="icon" href="assets/images/favicon.png" type="image/x-icon">
-    <link href="assets/css/styles.css" rel="stylesheet" />
-    <link rel="manifest" href="assets/js/manifest.json">
+    <link rel="manifest" href="manifest.json">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/styles.css">
     <style>
         .card {
             transition: box-shadow 1s;
@@ -31,8 +18,8 @@
         }
     </style>
 </head>
-<body class="p-0 bg-dark text-white">
-    <div class="container my-3">
+<body class="p-0 bg-dark text-white my-3">
+    <div class="container">
         <h4 class="text-center mb-3 text-white">Kalkulator Belanja</h4>
         <div class="card bg-dark border-white mb-3">
             <div class="card-body">
@@ -62,21 +49,21 @@
             <div class="card-body">
                 <form class="needs-validation" novalidate>
                     <div class="row">
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-4 col-12 mb-3">
                             <label class="form-label" for="item_belanja">Item Belanja</label>
                             <input autofocus type="text" class="form-control bg-dark text-white" id="item_belanja" placeholder="Masukkan Item Belanja" value="" required>
                             <div class="invalid-feedback">
                                 item belanja wajib diisi.
                             </div>
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-4 col-4 mb-3">
                             <label class="form-label" for="qty">Qty</label>
                             <input type="number" class="form-control bg-dark text-white" id="qty" placeholder="Masukkan Qty" value="" required>
                             <div class="invalid-feedback">
                                 qty wajib diisi.
                             </div>
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-4 col-8 mb-3">
                             <label class="form-label" for="harga">Harga</label>
                             <input type="number" class="form-control bg-dark text-white" id="harga" placeholder="Masukkan Harga" value="" required>
                             <div class="invalid-feedback">
@@ -89,6 +76,7 @@
             </div>
         </div>
     </div>
+
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
@@ -101,9 +89,7 @@
                 });
             });
         }
-      </script>
-    <script>
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
+
         (function() {
             'use strict';
             const tabel = document.getElementById('table');
